@@ -1,3 +1,8 @@
 <?php
+include "commons/header.php";
+?>
 
-include "includes/init.php";
+
+<?php
+include "commons/footer.php";
+?>

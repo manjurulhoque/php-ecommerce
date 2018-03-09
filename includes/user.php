@@ -2,10 +2,22 @@
 
 class User extends Base
 {
+
     protected static $table = "users";
     public static $db_table_fields = array("username", "password", "first_name", "last_name");
 
     public $id, $username, $password, $first_name, $last_name;
+
+    public function save_user()
+    {
+        if ($this->id) {
+            $this->update();
+        } else {
+            $this->create();
+        }
+
+        return true;
+    }
 
     public static function verify_user($username, $password)
     {
