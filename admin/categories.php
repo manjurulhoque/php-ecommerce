@@ -5,6 +5,20 @@ require "../includes/category.php";
 
 $categories = Category::find_all();
 
+if(isset($_POST['edit'])) {
+    $id = trim($_POST['id']);
+    $name = trim($_POST['name']);
+
+    $category = new Category();
+    $category->id = $id;
+    $category->name = $name;
+
+    if($category->save()) {
+        redirect("categories.php");
+    }
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +61,18 @@ $categories = Category::find_all();
                                     <tr>
                                         <td><?= $category->id; ?></td>
                                         <td><?= $category->name; ?></td>
-                                        <td>@mdo</td>
+                                        <td>
+                                            <span class="btn-group" style="margin-top: 5px">
+									            <button class="btn btn-warning btn-xs" data-toggle="modal"
+                                                        data-target="#item_edit" data-id="<?= $category->id; ?>">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal"
+                                                        data-target="#item_remove">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </button>
+                                            </span>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -59,6 +84,27 @@ $categories = Category::find_all();
         </div>
         <!-- /.row -->
         <div class="row">
+            <div class="modal fade item_edit" id="item_edit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" data-dismiss="modal" class="class pull-right">
+                                <span class="glyphicon glyphicon-remove"></span></a>
+                            <h3 class="modal-title">Edit Category </h3>
+                        </div>
+                        <div class="modal-body">
+                            <form role="form" method="post" action="">
+                                <div class="form-group">
+                                    <label>Category Name</label>
+                                    <input class="form-control" id="name" name="name" placeholder="Enter name">
+                                </div>
+                                <input type="hidden" id="id" name="id">
+                                <button type="submit" name="edit" class="btn btn-success">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.row -->
     </div>
@@ -68,6 +114,7 @@ $categories = Category::find_all();
 <!-- /#wrapper -->
 
 <?php include "commons/footer.php"; ?>
+<script src="js/custom.js"></script>
 
 </body>
 
