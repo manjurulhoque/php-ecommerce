@@ -9,8 +9,6 @@ spl_autoload_register(function ($class) {
 
         require_once($the_path);
 
-    } elseif (file_exists($the_path2)) {
-        require_once($the_path2);
     } else {
 
         die("This file name {$class}.php was not found");
