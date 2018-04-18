@@ -1,4 +1,7 @@
 <?php include "includes/init.php"; ?>
+<?php
+$categories = Category::find_all();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>PHP shop</title>
+    <title>PHP e-shop</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/flexslider.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -86,8 +89,9 @@
                             <li><a href="index.php">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li>Cat1</li>
-                                    <li>Cat2</li>
+                                    <?php foreach ($categories as $category) {
+                                        echo '<li><a href="">' . $category->name . '</a></li>';
+                                    } ?>
                                 </ul>
                             </li>
                             <li><a href="about.php">About Us</a></li>
@@ -104,7 +108,7 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                         <?php $user = $session->get_user();
-                                            echo $user->username;
+                                        echo $user->username;
                                         ?>
                                         <span class="caret"></span>
                                     </a>

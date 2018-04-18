@@ -5,9 +5,9 @@ spl_autoload_register(function ($class) {
     $the_path = "{$class}.php";
     $the_path2 = "includes/{$class}.php";
 
-    if (file_exists($the_path)) {
+    if (file_exists($the_path2)) {
 
-        require_once($the_path);
+        require_once($the_path2);
 
     } else {
 
